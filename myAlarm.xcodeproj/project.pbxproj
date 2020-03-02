@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3408CF12240DC449004037AC /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3408CF11240DC449004037AC /* Alarm.swift */; };
+		3408CF14240DD054004037AC /* dateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3408CF13240DD054004037AC /* dateFormat.swift */; };
 		34A1C19E240DB5D10000D65B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34A1C19D240DB5D10000D65B /* Main.storyboard */; };
 		34A1C1A0240DB6960000D65B /* AlarmListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A1C19F240DB6960000D65B /* AlarmListTableViewController.swift */; };
 		34A1C1A2240DB8B20000D65B /* AlarmDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A1C1A1240DB8B20000D65B /* AlarmDetailTableViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		3408CF11240DC449004037AC /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Alarm.swift; path = myAlarm/Views/Alarm.swift; sourceTree = SOURCE_ROOT; };
+		3408CF13240DD054004037AC /* dateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dateFormat.swift; sourceTree = "<group>"; };
 		34A1C19D240DB5D10000D65B /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		34A1C19F240DB6960000D65B /* AlarmListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmListTableViewController.swift; path = myAlarm/Views/AlarmListTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		34A1C1A1240DB8B20000D65B /* AlarmDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlarmDetailTableViewController.swift; path = myAlarm/Views/AlarmDetailTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -101,6 +103,7 @@
 				F7C203922131AD3400C3FC77 /* Assets.xcassets */,
 				F7C203942131AD3400C3FC77 /* LaunchScreen.storyboard */,
 				F7C203972131AD3400C3FC77 /* Info.plist */,
+				3408CF13240DD054004037AC /* dateFormat.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3408CF14240DD054004037AC /* dateFormat.swift in Sources */,
 				34A1C1A2240DB8B20000D65B /* AlarmDetailTableViewController.swift in Sources */,
 				34A1C1A4240DBA740000D65B /* SwitchTableViewCell.swift in Sources */,
 				3408CF12240DC449004037AC /* Alarm.swift in Sources */,
