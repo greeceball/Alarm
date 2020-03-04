@@ -9,22 +9,12 @@
 import Foundation
 
 class AlarmController {
-    
-    //Source of Truth
-    var alarms: [Alarm] = []
+   
     static var sharedInstance = AlarmController()
     
-    init() {
-        self.alarms = self.mockAlarms
-    }
+    //Source of Truth
+    var alarms: [Alarm] = [Alarm(fireDate: Date(timeIntervalSinceNow: 0.60), name: "Lunch Time", enabled: false)]
     
-    
-    var mockAlarms: [Alarm] = {
-        var getUp = Alarm(fireDate: Date(), name: "WakeUp", enabled: true)
-        var goToSchool = Alarm(fireDate: Date(), name: "Go to school", enabled: false)
-        var goToBed = Alarm(fireDate: Date(), name: "Go to bed", enabled: true)
-        return [getUp, goToSchool, goToBed]
-    }()
     
     static func toggleEnabled(for alarm: Alarm) {
         alarm.enabled = !alarm.enabled
@@ -36,16 +26,16 @@ class AlarmController {
     }
     
     func updateAlarm(alarm: Alarm, fireDate: Date, name: String, enabled: Bool) {
-        alarm.name = name
-        alarm.fireDate = fireDate
+        if let index = alarms.firstIndex(of: alarm) {
+            alarms[index].name = name
+            alarms[index].fireDate = fireDate
+            alarms[index].enabled = enabled
+        }
     }
     
     func deleteAlarm(alarm: Alarm){
-        guard let index = alarms.firstIndex(of: alarm) else {return}
+        if let index = alarms.firstIndex(of: alarm) {
         alarms.remove(at: index)
+        }
     }
-    
-    func updateIsSetFor(alarm: Alarm, enabled: Bool) {
-              alarm.enabled = enabled
-          }
 }

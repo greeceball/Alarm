@@ -10,77 +10,60 @@ import UIKit
 
 class AlarmDetailTableViewController: UITableViewController {
     
-    //MARK: - outlets
-    @IBOutlet weak var dateLabel: UIDatePicker!
-    @IBOutlet weak var nameLabel: UITextField!
-    @IBOutlet weak var enableButtonLabel: UIButton!
+    var alarmIsOn: Bool = true
     
     //MARK: - properties
     var alarm: Alarm? {
         didSet {
+            alarmIsOn = alarm?.enabled ?? true
+            loadViewIfNeeded()
             updateViews()
+            
         }
     }
-    
-    var alarmIsOn: Bool = true
-    
-    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        updateViews()
+        updateAlarm()
     }
     
+    //MARK: - outlets
+    @IBOutlet weak var dateLabel: UIDatePicker!
+    @IBOutlet weak var nameLabel: UITextField!
+    @IBOutlet weak var enableButtonLabel: UIButton!
     @IBAction func enableButtonTapped(_ sender: Any) {
+        alarmIsOn = !alarmIsOn
+        updateAlarm()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let nameLabel = nameLabel.text, let dateLabel = dateLabel?.date, let enableButtonLabel = enableButtonLabel?.isEnabled else {return}
-        
-        if let alarm = alarm {
-            AlarmController.sharedInstance.updateIsSetFor(alarm: alarm, enabled: alarm.enabled)
-            } else {
-            AlarmController.sharedInstance.addAlarm(fireDate: dateLabel, name: nameLabel, enabled: enableButtonLabel)
+        if let nameLabel = nameLabel.text {
+            if let dateLabel = dateLabel?.date{
+                if let alarm = alarm {
+                    AlarmController.sharedInstance.updateAlarm(alarm: alarm, fireDate: dateLabel, name: nameLabel, enabled: alarmIsOn)
+                }else{
+                    AlarmController.sharedInstance.addAlarm(fireDate: dateLabel, name: nameLabel, enabled: alarmIsOn)
+                }
+                navigationController?.popViewController(animated: true)
+            }
         }
-        navigationController?.popViewController(animated: true)
     }
     
-    private func updateViews() {
-        guard let alarm = alarm else {return}
-        dateLabel.date = alarm.fireDate
+    func updateViews() {
+        guard let alarm = self.alarm else {return}
+        dateLabel.setDate(alarm.fireDate, animated: false)
         nameLabel.text = alarm.name
-        enableButtonLabel.titleLabel?.text = alarm.enabled ? "Enabled" : "Disabled"
     }
     
-     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    func updateAlarm(){
+        if alarmIsOn {
+            enableButtonLabel.setTitle("Turn Off", for: .normal)
+            enableButtonLabel.backgroundColor = .red
+        } else {
+            enableButtonLabel.setTitle("Turn On", for: .normal)
+            enableButtonLabel.backgroundColor = .green
         }
+        
     }
-    */
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-    }
-
 }
